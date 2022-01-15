@@ -56,11 +56,11 @@ const Header = () => {
             <SearchIcon sx={{ p: 0 }} />
           </Button>
           <FormControl>
-            <InputLabel id="company-label">xxxx</InputLabel>
+            <InputLabel id="sort-label">Ordenar</InputLabel>
             <Select
-              labelId="company-label"
-              name="company"
-              label="Company"
+              labelId="sort-label"
+              name="sort"
+              label="Ordenar"
               // value={  }
               size="small"
               sx={{ width: "200px", m: 1 }}
@@ -79,8 +79,8 @@ const Header = () => {
             mb: 3,
           }}
         >
-          <RocketLaunchIcon color="primary" fontSize="large" sx={{ my: 1 }} />
-          <Typography variant="h4" component="h1" color="primary">
+          <RocketLaunchIcon color="primary" fontSize="large" sx={{ my: 2 }} />
+          <Typography variant="h5" component="h1" color="primary">
             Space Flight News
           </Typography>
         </Box>

@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import Container from '@mui/material/Container';
 import NewsContext from '../context/NewsContext';
+import { Box } from '@mui/material';
+import ArticleCard from './ArticleCard';
 
 const Articles = () => {
   const {
@@ -8,12 +10,17 @@ const Articles = () => {
   } = useContext(NewsContext);
 
   return (
-    <Container>
+    <Container
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        p: 3,
+      }}
+    >
       {
-        articlesList.map(({ id, title }) => (
-          <Container key={ id } component="article">
-            <p>{ title }</p>
-          </Container>
+        articlesList.map(({ id, title, imageURL, publishedAt, summary, newsSite, url }) => (
+          <ArticleCard key={ id } articleData={{ id, title, imageURL, publishedAt, summary, newsSite, url }} />
         ))
       }
     </Container>
