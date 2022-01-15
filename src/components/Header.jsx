@@ -56,7 +56,7 @@ const Header = () => {
             <SearchIcon sx={{ p: 0 }} />
           </Button>
           <FormControl>
-            <InputLabel id="company-label">Company</InputLabel>
+            <InputLabel id="company-label">xxxx</InputLabel>
             <Select
               labelId="company-label"
               name="company"
@@ -66,8 +66,8 @@ const Header = () => {
               sx={{ width: "200px", m: 1 }}
               // onChange={  }
               >
-              <MenuItem value={''}></MenuItem>
-              <MenuItem value={''}></MenuItem>
+              <MenuItem value={'oldest'}>Mais antigas</MenuItem>
+              <MenuItem value={'latest'}>Mais recentes</MenuItem>
             </Select>
           </FormControl>
         </Box>
