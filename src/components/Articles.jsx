@@ -19,8 +19,8 @@ const Articles = () => {
       }}
     >
       {
-        articlesList.map(({ id, title, imageURL, publishedAt, summary, newsSite, url }) => (
-          <ArticleCard key={ id } articleData={{ id, title, imageURL, publishedAt, summary, newsSite, url }} />
+        articlesList.map(({ id, title, imageUrl, publishedAt, summary, newsSite, url }) => (
+          <ArticleCard key={ id } articleData={{ id, title, imageUrl, publishedAt, summary, newsSite, url }} />
         ))
       }
     </Container>

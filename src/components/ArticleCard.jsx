@@ -7,21 +7,21 @@ import Button from '@mui/material/Button';
 import Link from '@mui/material/Link'
 import Typography from '@mui/material/Typography';
 
-const ArticleCard = ({ articleData: { id, title, imageURL, publishedAt, summary, newsSite, url } }) => (
+const ArticleCard = ({ articleData: { id, title, imageUrl, publishedAt, summary, newsSite, url } }) => (
   <Card
     sx={{
-      backgroundColor: "#f9f9f9",
       display: "flex",
       justifyContent: "flex-start",
       maxWidth: "800px",
       my: 1,
     }}
   >
+    { console.log(imageUrl) }
     <CardMedia
       component="img"
       height="250px"
-      width="250px"
-      image={ imageURL }
+      maxWidth="250px"
+      image={ imageUrl }
       alt="green iguana"
     />
     <CardContent>

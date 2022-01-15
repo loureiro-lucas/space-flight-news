@@ -51,8 +51,8 @@ const Header = () => {
               my: 1,
               p: 0,
               width: "10px",
-              }}
-            >
+            }}
+          >
             <SearchIcon sx={{ p: 0 }} />
           </Button>
           <FormControl>
@@ -61,11 +61,11 @@ const Header = () => {
               labelId="sort-label"
               name="sort"
               label="Ordenar"
-              // value={  }
+              value=''
               size="small"
               sx={{ width: "200px", m: 1 }}
               // onChange={  }
-              >
+            >
               <MenuItem value={'oldest'}>Mais antigas</MenuItem>
               <MenuItem value={'latest'}>Mais recentes</MenuItem>
             </Select>
