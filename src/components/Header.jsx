@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import NewsContext from '../context/NewsContext';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import SearchIcon from '@mui/icons-material/Search';
 import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
 
 const Header = () => {
+  const {
+    searchInput,
+    setSearchInput,
+    sortInput,
+    searchArticles,
+    sortArticles,
+  } = useContext(NewsContext);
+
   return (
     <AppBar
       position="static"
@@ -34,40 +43,43 @@ const Header = () => {
             my: 1
           }}
         >
-          <TextField
-            type="text"
-            name="search"
-            label="Buscar"
-            variant="outlined"
-            size="small"
-            sx={{ width: "200px", m: 1 }}
-            // value={  }
-            // onChange={  }
-          />
-          <Button
-            variant="contained"
-            sx={{
-              height: "40px",
-              my: 1,
-              p: 0,
-              width: "10px",
-            }}
-          >
-            <SearchIcon sx={{ p: 0 }} />
-          </Button>
+          <form onSubmit={ searchArticles }>
+            <TextField
+              type="text"
+              name="search"
+              label="Buscar"
+              variant="outlined"
+              size="small"
+              sx={{ width: "200px", m: 1 }}
+              value={ searchInput }
+              onChange={ ({ target: { value } }) => setSearchInput(value) }
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{
+                height: "40px",
+                my: 1,
+                p: 0,
+                width: "10px",
+              }}
+            >
+              <SearchIcon sx={{ p: 0 }} />
+            </Button>
+          </form>
           <FormControl>
-            <InputLabel id="sort-label">Ordenar</InputLabel>
+            <InputLabel sx={{ m: 1 }} id="sort-label">Ordenar</InputLabel>
             <Select
               labelId="sort-label"
               name="sort"
               label="Ordenar"
-              value=''
+              value={ sortInput }
               size="small"
               sx={{ width: "200px", m: 1 }}
-              // onChange={  }
+              onChange={ sortArticles }
             >
-              <MenuItem value={'oldest'}>Mais antigas</MenuItem>
               <MenuItem value={'latest'}>Mais recentes</MenuItem>
+              <MenuItem value={'oldest'}>Mais antigas</MenuItem>
             </Select>
           </FormControl>
         </Box>

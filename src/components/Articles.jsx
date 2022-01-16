@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
+import ArticleCard from './ArticleCard';
+import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import NewsContext from '../context/NewsContext';
-import { Box } from '@mui/material';
-import ArticleCard from './ArticleCard';
 
 const Articles = () => {
   const {
     articlesList,
+    loadMoreArticles,
   } = useContext(NewsContext);
 
   return (
@@ -23,6 +24,13 @@ const Articles = () => {
           <ArticleCard key={ id } articleData={{ id, title, imageUrl, publishedAt, summary, newsSite, url }} />
         ))
       }
+      <Button
+        type="button"
+        variant="outlined"
+        onClick={ loadMoreArticles }
+      >
+        Carregar mais
+      </Button>
     </Container>
   );
 };

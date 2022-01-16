@@ -16,11 +16,10 @@ const ArticleCard = ({ articleData: { id, title, imageUrl, publishedAt, summary,
       my: 1,
     }}
   >
-    { console.log(imageUrl) }
     <CardMedia
       component="img"
       height="250px"
-      maxWidth="250px"
+      // maxWidth="250px"
       image={ imageUrl }
       alt="green iguana"
     />

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Articles from '../components/Articles';
-import { ARTICLES_BY_AMOUNT, fetchArticles } from '../services';
+import { AMOUNT_PARAM, ARTICLES_URL, CONTAINS_PARAM, fetchArticles, SORT_PARAM } from '../services';
 import Header from '../components/Header';
 import NewsContext from '../context/NewsContext';
-import Typography from '@mui/material/Typography';
 
 const Home = () => {
   const INITIAL_AMOUNT = 10;
   const [articlesList, setArticlesList] = useState([]);
   const [amount, setAmount] = useState(INITIAL_AMOUNT);
+  const [searchInput, setSearchInput] = useState('');
+  const [sortInput, setSortInput] = useState('latest');
 
   const getArticles = async (URL) => {
     const articles = await fetchArticles(URL);
@@ -16,19 +17,63 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getArticles(`${ARTICLES_BY_AMOUNT}${amount}`);
+    getArticles(`${ARTICLES_URL}${AMOUNT_PARAM}${amount}`);
   }, []);
+
+  const loadMoreArticles = () => {
+    if (sortInput === 'oldest') {
+      getArticles(`${ARTICLES_URL}${AMOUNT_PARAM}${amount + INITIAL_AMOUNT}&${SORT_PARAM}${"publishedAt"}`);
+    } else {
+      getArticles(`${ARTICLES_URL}${AMOUNT_PARAM}${amount + INITIAL_AMOUNT}`);
+
+    }
+    setAmount((prevAmount) => prevAmount + INITIAL_AMOUNT);
+  };
+
+  const searchArticles = (event) => {
+    event.preventDefault()
+    if (sortInput === 'oldest') {
+      getArticles(
+        !!searchInput
+        ? `${ARTICLES_URL}${AMOUNT_PARAM}${INITIAL_AMOUNT}&${CONTAINS_PARAM}${searchInput}&${SORT_PARAM}${"publishedAt"}`
+        : `${ARTICLES_URL}${AMOUNT_PARAM}${INITIAL_AMOUNT}&${SORT_PARAM}${"publishedAt"}`
+      );
+    } else {
+      getArticles(
+        !!searchInput
+        ? `${ARTICLES_URL}${AMOUNT_PARAM}${INITIAL_AMOUNT}&${CONTAINS_PARAM}${searchInput}`
+        : `${ARTICLES_URL}${AMOUNT_PARAM}${INITIAL_AMOUNT}`
+      );
+    };
+    setAmount(INITIAL_AMOUNT);
+  };
+
+  const sortArticles = ({ target: { value } }) => {
+    setSortInput(value);
+    if (value === 'oldest') {
+      getArticles(`${ARTICLES_URL}${AMOUNT_PARAM}${INITIAL_AMOUNT}&${SORT_PARAM}${"publishedAt"}`);
+      setAmount(INITIAL_AMOUNT);
+    } else {
+      getArticles(`${ARTICLES_URL}${AMOUNT_PARAM}${INITIAL_AMOUNT}`);
+      setAmount(INITIAL_AMOUNT);
+    };
+  };
 
   const context = {
     articlesList,
+    loadMoreArticles,
+    searchInput,
+    setSearchInput,
+    sortInput,
+    setSortInput,
+    searchArticles,
+    sortArticles,
   };
 
   return (
     <NewsContext.Provider value={ context }>
-      <Typography>
-        <Header />
-        <Articles />
-      </Typography>
+      <Header />
+      <Articles />
     </NewsContext.Provider>
   )
 };
