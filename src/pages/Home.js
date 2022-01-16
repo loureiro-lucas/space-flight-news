@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Articles from '../components/Articles';
-import { AMOUNT_PARAM, ARTICLES_URL, CONTAINS_PARAM, fetchArticles, SORT_PARAM } from '../services';
+import ArticleDetails from '../components/ArticleDetails';
+import { AMOUNT_PARAM, ARTICLES_URL, CONTAINS_PARAM, fetchArticles, ID_PARAM, SORT_PARAM } from '../services';
 import Header from '../components/Header';
 import NewsContext from '../context/NewsContext';
 
 const Home = () => {
   const INITIAL_AMOUNT = 10;
-  const [articlesList, setArticlesList] = useState([]);
   const [amount, setAmount] = useState(INITIAL_AMOUNT);
+  const [articlesList, setArticlesList] = useState([]);
+  const [articleDetails, setArticleDetails] = useState({});
   const [searchInput, setSearchInput] = useState('');
   const [sortInput, setSortInput] = useState('latest');
 
@@ -59,6 +61,15 @@ const Home = () => {
     };
   };
 
+  const showArticleDetails = async (id) => {
+    const details = await fetchArticles(`${ARTICLES_URL}${ID_PARAM}${id}`);
+    setArticleDetails(details);
+  };
+
+  const closeArticleDetails = () => {
+    setArticleDetails({});
+  };
+
   const context = {
     articlesList,
     loadMoreArticles,
@@ -68,12 +79,15 @@ const Home = () => {
     setSortInput,
     searchArticles,
     sortArticles,
+    showArticleDetails,
+    articleDetails,
   };
 
   return (
     <NewsContext.Provider value={ context }>
       <Header />
       <Articles />
+      <ArticleDetails open={ !!articleDetails.id } close={ closeArticleDetails } />
     </NewsContext.Provider>
   )
 };
