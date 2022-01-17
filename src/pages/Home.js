@@ -4,6 +4,8 @@ import ArticleDetails from '../components/ArticleDetails';
 import { AMOUNT_PARAM, ARTICLES_URL, CONTAINS_PARAM, fetchArticles, ID_PARAM, SORT_PARAM } from '../services';
 import Header from '../components/Header';
 import NewsContext from '../context/NewsContext';
+import { ThemeProvider } from '@mui/material';
+import customTheme from '../assets/theme';
 
 const Home = () => {
   const INITIAL_AMOUNT = 10;
@@ -19,14 +21,14 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getArticles(`${ARTICLES_URL}${AMOUNT_PARAM}${amount}`);
+    getArticles(`${ARTICLES_URL}?${AMOUNT_PARAM}${amount}`);
   }, []);
 
   const loadMoreArticles = () => {
     if (sortInput === 'oldest') {
-      getArticles(`${ARTICLES_URL}${AMOUNT_PARAM}${amount + INITIAL_AMOUNT}&${SORT_PARAM}${"publishedAt"}`);
+      getArticles(`${ARTICLES_URL}?${AMOUNT_PARAM}${amount + INITIAL_AMOUNT}&${SORT_PARAM}${"publishedAt"}`);
     } else {
-      getArticles(`${ARTICLES_URL}${AMOUNT_PARAM}${amount + INITIAL_AMOUNT}`);
+      getArticles(`${ARTICLES_URL}?${AMOUNT_PARAM}${amount + INITIAL_AMOUNT}`);
 
     }
     setAmount((prevAmount) => prevAmount + INITIAL_AMOUNT);
@@ -37,14 +39,14 @@ const Home = () => {
     if (sortInput === 'oldest') {
       getArticles(
         !!searchInput
-        ? `${ARTICLES_URL}${AMOUNT_PARAM}${INITIAL_AMOUNT}&${CONTAINS_PARAM}${searchInput}&${SORT_PARAM}${"publishedAt"}`
-        : `${ARTICLES_URL}${AMOUNT_PARAM}${INITIAL_AMOUNT}&${SORT_PARAM}${"publishedAt"}`
+        ? `${ARTICLES_URL}?${AMOUNT_PARAM}${INITIAL_AMOUNT}&${CONTAINS_PARAM}${searchInput}&${SORT_PARAM}${"publishedAt"}`
+        : `${ARTICLES_URL}?${AMOUNT_PARAM}${INITIAL_AMOUNT}&${SORT_PARAM}${"publishedAt"}`
       );
     } else {
       getArticles(
         !!searchInput
-        ? `${ARTICLES_URL}${AMOUNT_PARAM}${INITIAL_AMOUNT}&${CONTAINS_PARAM}${searchInput}`
-        : `${ARTICLES_URL}${AMOUNT_PARAM}${INITIAL_AMOUNT}`
+        ? `${ARTICLES_URL}?${AMOUNT_PARAM}${INITIAL_AMOUNT}&${CONTAINS_PARAM}${searchInput}`
+        : `${ARTICLES_URL}?${AMOUNT_PARAM}${INITIAL_AMOUNT}`
       );
     };
     setAmount(INITIAL_AMOUNT);
@@ -53,12 +55,13 @@ const Home = () => {
   const sortArticles = ({ target: { value } }) => {
     setSortInput(value);
     if (value === 'oldest') {
-      getArticles(`${ARTICLES_URL}${AMOUNT_PARAM}${INITIAL_AMOUNT}&${SORT_PARAM}${"publishedAt"}`);
+      getArticles(`${ARTICLES_URL}?${AMOUNT_PARAM}${INITIAL_AMOUNT}&${SORT_PARAM}${"publishedAt"}`);
       setAmount(INITIAL_AMOUNT);
     } else {
-      getArticles(`${ARTICLES_URL}${AMOUNT_PARAM}${INITIAL_AMOUNT}`);
+      getArticles(`${ARTICLES_URL}?${AMOUNT_PARAM}${INITIAL_AMOUNT}`);
       setAmount(INITIAL_AMOUNT);
     };
+    setSearchInput('');
   };
 
   const showArticleDetails = async (id) => {
@@ -85,11 +88,13 @@ const Home = () => {
 
   return (
     <NewsContext.Provider value={ context }>
-      <Header />
-      <Articles />
-      <ArticleDetails open={ !!articleDetails.id } close={ closeArticleDetails } />
+      <ThemeProvider theme={ customTheme }>
+        <Header />
+        <Articles />
+        <ArticleDetails open={ !!articleDetails.id } close={ closeArticleDetails } />
+      </ThemeProvider>
     </NewsContext.Provider>
-  )
+  );
 };
 
 export default Home;

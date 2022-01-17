@@ -27,6 +27,7 @@ const Articles = () => {
       <Button
         type="button"
         variant="outlined"
+        color="secondary"
         onClick={ loadMoreArticles }
       >
         Carregar mais

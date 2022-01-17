@@ -62,6 +62,7 @@ const Header = () => {
                 my: 1,
                 p: 0,
                 width: "10px",
+                // backgroundColor: "#302E53",
               }}
             >
               <SearchIcon sx={{ p: 0 }} />

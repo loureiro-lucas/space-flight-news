@@ -40,7 +40,7 @@ const ArticleCard = ({ articleData: { id, title, imageUrl, publishedAt, summary,
           <Typography variant="body2">
             { publishedAt.slice(0, 10).split('-').reverse().join('/') }
           </Typography>
-          <Link href={ url } underline="none">{ newsSite }</Link>
+          <Link href={ url } color="secondary" underline="none">{ newsSite }</Link>
         </Box>
         <Typography
           variant="body1"
