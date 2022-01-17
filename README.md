@@ -1,4 +1,4 @@
-#Front-end Challenge 🏅 2021 - Space Flight News by Coodesh
+# Front-end Challenge 🏅 2021 - Space Flight News by Coodesh
 
 #### Descrição:
 Projeto de uma aplicação que consome a `API` [Space Flight News](https://api.spaceflightnewsapi.net/v3/documentation) e retorna uma lista de notícias sobre o espaço. Há um campo de busca por palavras no título das notícias, um botão para carregar mais notícias e uma funcionalidade de ordenar as notícias da mais recente para a mais antiga(padrão) e vive-versa. Além disso, ao clicar no botão **Ver mais** é aberto um modal com mais detalhes da notícia.
