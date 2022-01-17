@@ -9,4 +9,8 @@ Essa aplicação foi desenvolvida utilizando `HTML`, `CSS`, `JavaScript`, `React
 #### Instruções:
 Para instalar o projeto basta fazer um clone do repositório, entrar no diretório **space-flight-news**, executar o comando `npm install` e, em seguida, `npm start`.
 
+#### Apresentação da aplicação:
+
+[Vídeo](https://www.loom.com/embed/38c4d7e8e43b4a97b19cbecbaf914750)
+
 **`This is a challenge by Coodesh.`**
