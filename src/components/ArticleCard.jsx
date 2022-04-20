@@ -20,12 +20,14 @@ const ArticleCard = ({ articleData: { id, title, imageUrl, publishedAt, summary,
         my: 1,
       }}
     >
-      <CardMedia
-        component="img"
-        height="250px"
-        image={ imageUrl }
-        alt="green iguana"
-      />
+      <Box sx={{ height: "250px", minWidth: "400px"}}>
+        <CardMedia
+          alt="news cover"
+          component="img"
+          height="250px"
+          image={ imageUrl }
+        />
+      </Box>
       <CardContent>
         <Typography variant="h6" component="h2">
           { title }
